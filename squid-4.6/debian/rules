@@ -55,6 +55,9 @@ DEB_CONFIGURE_EXTRA_FLAGS := BUILDCXXFLAGS="$(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)" 
 		--enable-icmp \
 		--enable-zph-qos \
 		--enable-ecap \
+		--enable-ssl \
+		--withopenssl="/etc/ssl/openssl.cnf" \
+		--enable-ssl-crtd \
 		--disable-translation \
 		--with-swapdir=/var/spool/squid \
 		--with-logdir=/var/log/squid \
