@@ -12,7 +12,10 @@ import subprocess
 
 parser = argparse.ArgumentParser(description='WYL GIT Auto-Pusher')
 parser.add_argument('-c', '--confirm', action='store_true')
+parser.add_argument('-n', '--no-comment', action='store_true')
 args = parser.parse_args()
+
+disabled_commenting = True if args.no_comment is True else False
 
 def generate_timestamp():
     return datetime.now()
@@ -22,11 +25,12 @@ def generate_dt_string(timestamp_=None):
     # readable - date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
     return now.strftime("%m/%d/%Y, %H:%M:%S") # "%Y%m%d_%H%M%S"
 
-def git_push():
+def git_push(dc_=False):
     try:
         repo = Repo(PATH_OF_GIT_REPO)
         repo.git.add(update=True)
-        repo.index.commit(COMMIT_MESSAGE)
+        if dc_ is False:
+            repo.index.commit(COMMIT_MESSAGE)
         origin = repo.remote(name='origin')
         origin.push()
     except:
@@ -62,6 +66,6 @@ executing_user = get_current_executing_user()
 COMMIT_MESSAGE = 'not-really-a-important-comment @ '+commit_dt_string+' ('+executing_user+')'
         
 if args.confirm is True:
-    git_push()
+    git_push(disabled_commenting)
 else:
     print("-c / --confirm to confirm push")
