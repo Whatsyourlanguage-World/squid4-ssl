@@ -1,0 +1,23 @@
+From 8ce644cfad297651f8848895cad28dc3d405b888 Mon Sep 17 00:00:00 2001
+From: root <sfrank@whatsyourlanguage.world>
+Date: Wed, 26 Feb 2020 01:45:28 +0100
+Subject: [PATCH] enabled ssl compiling options for configure
+
+---
+ squid-4.6/debian/rules | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/squid-4.6/debian/rules b/squid-4.6/debian/rules
+index b70c064..d65274b 100755
+--- a/squid-4.6/debian/rules
++++ b/squid-4.6/debian/rules
+@@ -55,6 +55,9 @@ DEB_CONFIGURE_EXTRA_FLAGS := BUILDCXXFLAGS="$(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)"
+ 		--enable-icmp \
+ 		--enable-zph-qos \
+ 		--enable-ecap \
++		--enable-ssl \
++		--withopenssl="/etc/ssl/openssl.cnf" \
++		--enable-ssl-crtd \
+ 		--disable-translation \
+ 		--with-swapdir=/var/spool/squid \
+ 		--with-logdir=/var/log/squid \
